@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist de Patín · Mi Technologies</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/checklist-patin.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+</head>
+<body>
+
+  <!-- ============================== BARRA LATERAL ============================== -->
+  <nav class="app-sidebar no-print" aria-label="Módulos del sistema">
+    <div class="sidebar-brand">
+      <img src="/logo-fft-icon.png" alt="Centro de Control FFT" class="brand-logo">
+    </div>
+    <div class="sidebar-nav">
+      <a href="/" class="sidebar-link">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        <span>Etiquetas FFT</span>
+      </a>
+      <a href="/reporte-paletizado.html" class="sidebar-link">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+          <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path>
+          <line x1="9" y1="13" x2="15" y2="13"></line>
+          <line x1="9" y1="17" x2="15" y2="17"></line>
+        </svg>
+        <span>Reporte de Paletizado</span>
+      </a>
+      <a href="/control-calidad.html" class="sidebar-link">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 12l2 2 4-4"></path>
+          <circle cx="12" cy="12" r="9"></circle>
+        </svg>
+        <span>Control de Calidad</span>
+      </a>
+      <a href="/reporte-qc-vios-hy.html" class="sidebar-link">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <span>Reporte QC - VIOS / HY</span>
+      </a>
+      <a href="/procesado-vios-hy.html" class="sidebar-link">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="17 1 21 5 17 9"></polyline>
+          <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+          <polyline points="7 23 3 19 7 15"></polyline>
+          <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+        </svg>
+        <span>Procesado VIOS a HY</span>
+      </a>
+      <a href="/checklist-patin.html" class="sidebar-link active" aria-current="page">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+          <rect x="8" y="2" width="8" height="4" rx="1"></rect>
+          <path d="m9 14 2 2 4-4"></path>
+        </svg>
+        <span>Checklist de Patín</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ============================== HEADER ============================== -->
+  <header class="no-print app-header">
+    <div class="header-left">
+      <img src="/logo-mitech.png" alt="Mi Technologies" class="header-logo brand-logo">
+      <div class="header-titles">
+        <h1>Checklist de Patín</h1>
+        <p class="subtitle">Checklist semanal de inspección de patín eléctrico. Se imprime una hoja Carta horizontal por impresión.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content cpt-main">
+
+    <!-- ======================== BARRA DE IMPRESIÓN ======================== -->
+    <section class="cpt-print-bar no-print" aria-label="Impresión">
+      <p class="cpt-print-info">
+        Hoja en blanco para llenar a mano. Se imprime una sola hoja Carta
+        horizontal por impresión.
+      </p>
+      <button type="button" id="cpt-btn-print" class="btn btn-primary">Imprimir hoja</button>
+    </section>
+
+    <!-- =================== VISTA PREVIA DE LA HOJA =================== -->
+    <h2 class="cpt-preview-title no-print">Vista previa de impresión</h2>
+
+    <section class="cpt-sheet-section" aria-label="Vista previa de impresión">
+      <div class="cpt-sheet-wrap" id="cpt-sheet-wrap">
+        <div class="cpt-sheet" id="cpt-print-area">
+
+          <!-- 1. Encabezado -->
+          <div class="cpt-head">
+            <img src="/logo-mitech.png" alt="Mi Technologies" class="cpt-logo brand-logo">
+            <h2 class="cpt-title">
+              <span class="cpt-title-main">Check List - Patín Eléctrico</span>
+              <span class="cpt-title-sub">Reporte por turno</span>
+            </h2>
+          </div>
+
+          <!-- 2. Información general -->
+          <div class="cpt-info">
+            <div class="cpt-info-row cpt-info-row--1">
+              <div class="cpt-cell cpt-cell--label">Número de patín:</div>
+              <div class="cpt-cell"><span class="cpt-fill"></span></div>
+              <div class="cpt-cell cpt-cell--label">Área:</div>
+              <div class="cpt-cell"><span class="cpt-fill"></span></div>
+              <div class="cpt-cell cpt-cell--label">Fecha:</div>
+              <div class="cpt-cell">
+                <div class="cpt-date"><span class="cpt-fill"></span><span>/</span><span class="cpt-fill"></span><span>/</span><span class="cpt-fill cpt-fill--yr"></span></div>
+              </div>
+              <div class="cpt-cell cpt-cell--label">Turno:</div>
+              <div class="cpt-cell"><span class="cpt-fill"></span></div>
+            </div>
+            <div class="cpt-info-row cpt-info-row--2">
+              <div class="cpt-cell cpt-cell--label">Cumple: <span class="cpt-mark">&#10003;</span></div>
+              <div class="cpt-cell cpt-cell--label">No cumple: <span class="cpt-mark">&#10007;</span></div>
+              <div class="cpt-cell cpt-cell--label">Nombre del responsable: <span class="cpt-fill"></span></div>
+            </div>
+          </div>
+
+          <!-- 3. Tabla principal -->
+          <table class="cpt-table">
+            <colgroup>
+              <col class="cpt-col-desc">
+              <col span="7">
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col" class="cpt-th-desc">Inspección técnica</th>
+                <th scope="col">Lunes</th>
+                <th scope="col">Martes</th>
+                <th scope="col">Miércoles</th>
+                <th scope="col">Jueves</th>
+                <th scope="col">Viernes</th>
+                <th scope="col">Sábado</th>
+                <th scope="col">Domingo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="cpt-item"><span class="cpt-num">1.</span>Ruedas <em>(desgaste)</em></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td class="cpt-item"><span class="cpt-num">2.</span>Motor eléctrico <em>(comprobar ruidos, limpieza y funcionamiento)</em></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td class="cpt-item"><span class="cpt-num">3.</span>Batería eléctrica <em>(comprobar daños visibles)</em></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td class="cpt-item"><span class="cpt-num">4.</span>Tornillos y tiradores <em>(apretar tornillos y tuercas)</em></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td class="cpt-item"><span class="cpt-num">5.</span>Limpieza general <em>(limpiar superficie, evitar agua a presión)</em></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td class="cpt-item"><span class="cpt-num">6.</span>Conexiones eléctricas <em>(comprobar cables y conectores)</em></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td class="cpt-item"><span class="cpt-num">7.</span>Engranajes y mecanismos <em>(lubricar puntos móviles)</em></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr class="cpt-section"><td colspan="8">Sistema de frenado</td></tr>
+              <tr><td class="cpt-item"><span class="cpt-num">8.</span>Pastillas de freno <em>(revisar desgaste)</em></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td class="cpt-item"><span class="cpt-num">9.</span>Disco de freno <em>(si tiene - revisar rectitud)</em></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td class="cpt-item"><span class="cpt-num">10.</span>Ajuste de freno <em>(comprobar tensión y respuesta)</em></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+          </table>
+
+          <!-- 4. Firma del operador -->
+          <div class="cpt-sign-line">Firma del operador: <span class="cpt-fill"></span></div>
+
+          <!-- 5. Indicación de mantenimiento -->
+          <p class="cpt-note">
+            Realizar mantenimiento cada 100-1000 km o cada 3 meses; utilizar lubricante específico para patines eléctricos;
+            evitar sobrecargar la batería cuando esté al 10-20%; almacenar el patín con la batería cargada 40-60% si no se
+            utilizará por periodos prolongados.
+          </p>
+
+          <!-- 6 + 7. Observaciones + imagen del patín -->
+          <div class="cpt-obs">
+            <div class="cpt-obs-list">
+              <div class="cpt-obs-head">Observaciones</div>
+              <div class="cpt-obs-row">LUNES:</div>
+              <div class="cpt-obs-row">MARTES:</div>
+              <div class="cpt-obs-row">MIÉRCOLES:</div>
+              <div class="cpt-obs-row">JUEVES:</div>
+              <div class="cpt-obs-row">VIERNES:</div>
+              <div class="cpt-obs-row">SÁBADO:</div>
+              <div class="cpt-obs-row">DOMINGO:</div>
+            </div>
+            <div class="cpt-obs-img">
+              <img src="/patin-electrico.png" alt="Patín eléctrico" class="cpt-asset">
+            </div>
+          </div>
+
+          <!-- 8 + 9. Firmas finales + RMA -->
+          <div class="cpt-signs">
+            <div class="cpt-sign">
+              <span class="cpt-sign-rule"></span>
+              <span class="cpt-sign-label">Firma supervisor</span>
+            </div>
+            <div class="cpt-sign">
+              <span class="cpt-sign-rule"></span>
+              <span class="cpt-sign-label">Firma líder de área</span>
+            </div>
+            <div class="cpt-sign">
+              <span class="cpt-sign-rule"></span>
+              <span class="cpt-sign-label">Firma mantenimiento</span>
+              <div class="cpt-rma">RMA y fecha de recibido mantenimiento: <span class="cpt-fill"></span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <p class="print-info no-print">Al imprimir se generará una sola hoja Carta horizontal en blanco para llenar a mano.</p>
+  </main>
+
+  <footer class="no-print app-footer">
+    Mi Technologies Internacional S.A. de C.V. · Sistema interno · Área FFT TV
+  </footer>
+
+  <script src="/checklist-patin.js"></script>
+</body>
+</html>

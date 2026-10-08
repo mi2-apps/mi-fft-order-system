@@ -1,0 +1,486 @@
+/* ==========================================================================
+   Checklist de Patín — módulo nuevo, aislado. Hoja Carta HORIZONTAL
+   (11in x 8.5in) EN BLANCO para llenar a mano, una sola hoja por impresión.
+   Mismo patrón que procesado-vios-hy.css: reutiliza sólo clases globales
+   genéricas (.app-header, .app-footer, .app-sidebar, .main-content, .btn,
+   .print-info) — todo lo específico de este módulo usa el prefijo "cpt-".
+
+   Escala única: toda la hoja se mide en "u" (var(--u)), donde la hoja
+   completa mide 1100u x 850u. En pantalla 1u = ancho de la hoja / 1100
+   (container query); al imprimir 1u = 0.01in exacto, así la vista previa y
+   la impresión son el mismo layout, sólo cambia la escala.
+   ========================================================================== */
+
+.cpt-main { max-width: 1100px; padding: 20px 16px 40px; }
+
+/* ---------------------------------------------------------------------- */
+/* Barra de impresión                                                       */
+/* ---------------------------------------------------------------------- */
+
+.cpt-print-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: var(--white);
+  border: 1px solid var(--gray-300);
+  border-radius: 4px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+
+.cpt-print-info {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--gray-700);
+  max-width: 640px;
+}
+
+.cpt-preview-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0 0 14px;
+}
+
+/* ==========================================================================
+   HOJA — proporción Carta HORIZONTAL preservada en pantalla
+   ========================================================================== */
+
+/* En pantallas chicas la hoja no se encoge por debajo de 760px: se desplaza
+   horizontalmente dentro de esta sección (la página no hace scroll lateral). */
+.cpt-sheet-section {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+
+.cpt-sheet-wrap {
+  container-type: inline-size;
+  width: min(1000px, 100%);
+  min-width: 760px;
+  aspect-ratio: 11 / 8.5;
+  margin: 0 auto;
+}
+
+.cpt-sheet {
+  --u: calc(100cqw / 1100);
+  --line: #111111;
+  --head: #d9dbdd;
+  --tint: #eef0f1;
+
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  border: 1px solid var(--gray-300);
+  box-shadow: 0 2px 10px rgba(17, 17, 17, 0.08);
+  padding: calc(28 * var(--u)) calc(30 * var(--u));
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font);
+  color: #111111;
+  overflow: hidden;
+  box-sizing: border-box;
+  line-height: 1.15;
+}
+
+.cpt-sheet *,
+.cpt-sheet *::before,
+.cpt-sheet *::after { box-sizing: border-box; }
+
+/* ---------------------------------------------------------------------- */
+/* 1. Encabezado                                                            */
+/* ---------------------------------------------------------------------- */
+
+.cpt-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(20 * var(--u));
+  height: calc(58 * var(--u));
+  padding-bottom: calc(6 * var(--u));
+  border-bottom: calc(2.5 * var(--u)) solid var(--brand-blue);
+  flex-shrink: 0;
+}
+
+.cpt-logo {
+  height: calc(48 * var(--u));
+  width: auto; /* conserva la proporción real del logo oficial */
+  flex-shrink: 0;
+}
+
+.cpt-title {
+  margin: 0;
+  text-align: right;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+  color: #111111;
+}
+
+.cpt-title-main { display: block; font-size: calc(25 * var(--u)); }
+.cpt-title-sub {
+  display: block;
+  margin-top: calc(3 * var(--u));
+  font-size: calc(14 * var(--u));
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #4a4a4a;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 2. Información general                                                   */
+/* ---------------------------------------------------------------------- */
+
+.cpt-info {
+  margin-top: calc(9 * var(--u));
+  border: calc(1.2 * var(--u)) solid var(--line);
+  flex-shrink: 0;
+}
+
+.cpt-info-row {
+  display: grid;
+  height: calc(29 * var(--u));
+}
+
+.cpt-info-row + .cpt-info-row { border-top: calc(1 * var(--u)) solid var(--line); }
+
+.cpt-info-row--1 { grid-template-columns: 1.15fr 1.4fr 0.95fr 1.25fr 0.75fr 1fr 0.75fr 1.3fr; }
+.cpt-info-row--2 { grid-template-columns: 1fr 1fr 4.8fr; }
+
+.cpt-cell {
+  display: flex;
+  align-items: center;
+  padding: 0 calc(8 * var(--u));
+  font-size: calc(11.5 * var(--u));
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.cpt-cell + .cpt-cell { border-left: calc(1 * var(--u)) solid var(--line); }
+
+.cpt-cell--label { background: var(--tint); }
+
+.cpt-mark {
+  margin-left: calc(10 * var(--u));
+  font-size: calc(16 * var(--u));
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* Línea para escribir a mano dentro de una celda */
+.cpt-fill {
+  flex: 1 1 auto;
+  align-self: flex-end;
+  margin-bottom: calc(6 * var(--u));
+  border-bottom: calc(1 * var(--u)) solid var(--line);
+  min-width: calc(20 * var(--u));
+}
+
+.cpt-cell--label .cpt-fill { margin-left: calc(10 * var(--u)); }
+
+.cpt-date {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  gap: calc(4 * var(--u));
+  font-weight: 700;
+}
+.cpt-date .cpt-fill { margin-bottom: calc(6 * var(--u)); }
+.cpt-date .cpt-fill--yr { flex-grow: 1.6; }
+.cpt-date span:not(.cpt-fill) { padding-bottom: calc(5 * var(--u)); font-size: calc(12 * var(--u)); }
+
+/* ---------------------------------------------------------------------- */
+/* 3. Tabla principal                                                       */
+/* ---------------------------------------------------------------------- */
+
+.cpt-table {
+  width: 100%;
+  margin-top: calc(9 * var(--u));
+  border-collapse: collapse;
+  table-layout: fixed;
+  border: calc(1.2 * var(--u)) solid var(--line);
+  flex-shrink: 0;
+}
+
+.cpt-table .cpt-col-desc { width: 37%; }
+
+.cpt-table th,
+.cpt-table td {
+  border: calc(1 * var(--u)) solid var(--line);
+  padding: 0 calc(8 * var(--u));
+  vertical-align: middle;
+}
+
+.cpt-table thead th {
+  height: calc(31 * var(--u));
+  background: var(--head);
+  font-size: calc(11.5 * var(--u));
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.cpt-table thead th.cpt-th-desc {
+  text-align: left;
+  font-size: calc(14 * var(--u));
+  letter-spacing: 0.03em;
+}
+
+.cpt-table tbody td { height: calc(24.5 * var(--u)); }
+
+.cpt-item {
+  font-size: calc(11.5 * var(--u));
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.cpt-num {
+  display: inline-block;
+  width: calc(22 * var(--u));
+  font-weight: 700;
+}
+
+.cpt-item strong { font-weight: 700; }
+.cpt-item em { font-style: normal; color: #4a4a4a; }
+
+.cpt-section td {
+  height: calc(23 * var(--u)) !important;
+  background: var(--head);
+  font-size: calc(12.5 * var(--u));
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 4. Firma del operador                                                    */
+/* ---------------------------------------------------------------------- */
+
+.cpt-sign-line {
+  display: flex;
+  align-items: flex-end;
+  gap: calc(10 * var(--u));
+  height: calc(32 * var(--u));
+  padding: 0 calc(4 * var(--u)) calc(4 * var(--u));
+  font-size: calc(12 * var(--u));
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cpt-sign-line .cpt-fill { margin-bottom: calc(3 * var(--u)); }
+
+/* ---------------------------------------------------------------------- */
+/* 5. Indicación de mantenimiento                                           */
+/* ---------------------------------------------------------------------- */
+
+.cpt-note {
+  margin: calc(6 * var(--u)) 0 0;
+  padding: calc(6 * var(--u)) calc(14 * var(--u));
+  background: var(--tint);
+  border: calc(1 * var(--u)) solid #7a7a7a;
+  border-left: calc(4 * var(--u)) solid var(--brand-blue);
+  font-size: calc(10 * var(--u));
+  line-height: 1.35;
+  text-align: center;
+  color: #1f1f1f;
+  flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 6 + 7. Observaciones + imagen del patín                                  */
+/* ---------------------------------------------------------------------- */
+
+.cpt-obs {
+  display: grid;
+  grid-template-columns: 1fr calc(250 * var(--u));
+  margin-top: calc(9 * var(--u));
+  border: calc(1.2 * var(--u)) solid var(--line);
+  flex-shrink: 0;
+}
+
+.cpt-obs-list { display: flex; flex-direction: column; }
+
+.cpt-obs-head {
+  height: calc(27 * var(--u));
+  display: flex;
+  align-items: center;
+  padding: 0 calc(10 * var(--u));
+  background: var(--head);
+  border-bottom: calc(1 * var(--u)) solid var(--line);
+  font-size: calc(14 * var(--u));
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.cpt-obs-row {
+  display: flex;
+  align-items: center;
+  height: calc(22.5 * var(--u));
+  padding: 0 calc(10 * var(--u));
+  font-size: calc(11 * var(--u));
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.cpt-obs-row + .cpt-obs-row { border-top: calc(1 * var(--u)) solid var(--line); }
+
+.cpt-obs-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(10 * var(--u));
+  border-left: calc(1 * var(--u)) solid var(--line);
+  background: #ffffff;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.cpt-obs-img img {
+  display: block;
+  width: 100%;
+  height: calc(160 * var(--u));
+  object-fit: contain;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 8 + 9. Firmas finales + RMA                                              */
+/* ---------------------------------------------------------------------- */
+
+.cpt-signs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: auto; /* ocupa el espacio restante al fondo de la hoja */
+  padding-top: calc(10 * var(--u));
+  flex-shrink: 0;
+}
+
+.cpt-sign {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: calc(38 * var(--u)) calc(26 * var(--u)) 0;
+}
+
+.cpt-sign + .cpt-sign { border-left: calc(1.2 * var(--u)) solid var(--line); }
+
+.cpt-sign-rule {
+  width: 100%;
+  border-top: calc(1.2 * var(--u)) solid var(--line);
+}
+
+.cpt-sign-label {
+  margin-top: calc(5 * var(--u));
+  font-size: calc(11.5 * var(--u));
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.cpt-rma {
+  display: flex;
+  align-items: flex-end;
+  gap: calc(8 * var(--u));
+  width: 100%;
+  margin-top: calc(9 * var(--u));
+  font-size: calc(9.5 * var(--u));
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cpt-rma .cpt-fill { margin-bottom: calc(2 * var(--u)); }
+
+/* ---------------------------------------------------------------------- */
+/* Responsive (sólo pantalla — la hoja conserva su layout propio)          */
+/* ---------------------------------------------------------------------- */
+
+@media (max-width: 600px) {
+  .cpt-print-bar { flex-direction: column; align-items: stretch; }
+  .cpt-print-bar .btn { width: 100%; }
+}
+
+/* ==========================================================================
+   IMPRESIÓN — EXACTAMENTE una hoja Carta HORIZONTAL (11in x 8.5in), sólo la
+   hoja de este módulo. CSS aislado con IDs propios (#cpt-sheet-wrap /
+   #cpt-print-area). @page margin 0 evita encabezado/pie del navegador (URL,
+   fecha, número de página); el margen seguro lo da el padding de la hoja.
+   ========================================================================== */
+
+@page {
+  size: letter landscape;
+  margin: 0;
+}
+
+@media print {
+  html, body {
+    width: 11in;
+    height: 8.5in;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+  }
+
+  .no-print { display: none !important; }
+  .app-sidebar { display: none !important; }
+
+  body * { visibility: hidden; }
+
+  #cpt-sheet-wrap,
+  #cpt-sheet-wrap *,
+  #cpt-print-area,
+  #cpt-print-area * {
+    visibility: visible !important;
+  }
+
+  .cpt-sheet-section { overflow: visible; padding: 0; }
+
+  #cpt-sheet-wrap {
+    container-type: normal;
+    position: fixed;
+    inset: 0;
+    width: 11in;
+    min-width: 0;
+    height: 8.5in;
+    aspect-ratio: auto;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  #cpt-print-area {
+    --u: 0.01in; /* 1100u = 11in exactos */
+    position: fixed;
+    inset: 0;
+    width: 11in;
+    height: 8.5in;
+    margin: 0;
+    /* 0.3in ≈ 7.6mm por lado: margen seguro para impresoras reales */
+    padding: 0.3in 0.32in;
+    border: none;
+    box-shadow: none;
+    box-sizing: border-box;
+    overflow: hidden;
+    page-break-before: avoid;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+    break-before: avoid-page;
+    break-after: avoid-page;
+    break-inside: avoid-page;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
